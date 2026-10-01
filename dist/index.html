@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Compare the human cost of moving USDC across chains." />
+    <title>Bridge Friction Index</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1020'/%3E%3Cpath d='M12 40h40M20 40V27c0-5 5-9 12-9s12 4 12 9v13' fill='none' stroke='%235eead4' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Bridge Friction Index home"><span class="brand-mark">↔</span> BFI</a>
+        <div class="nav-meta"><span class="pulse"></span> Illustrative research dataset</div>
+        <a class="source-link" href="https://www.reddit.com/r/defi/comments/1wt6fpf/why_does_moving_crypto_have_to_be_a_part_time_job/" target="_blank" rel="noreferrer">Origin story</a>
+      </nav>
+
+      <section id="top" class="intro">
+        <p class="eyebrow">USDC cross-chain experience audit</p>
+        <h1>Moving money should not feel like a side job.</h1>
+        <p class="lede">Price is only one part of a bridge. Compare the work: screens, signatures, approvals, chain switches, and wait time.</p>
+        <div class="method-line"><span>Scenario</span><strong>USDC · Ethereum → Base · $1,000</strong><span class="dot">·</span><span>Observed set</span><strong id="observed-date">Sep 2026 sample</strong></div>
+      </section>
+
+      <section class="controls" aria-label="Comparison controls">
+        <div class="control-group">
+          <label for="sort-select">Rank by</label>
+          <select id="sort-select">
+            <option value="friction">Friction score</option>
+            <option value="clicks">Fewest clicks</option>
+            <option value="fees">Lowest fee</option>
+            <option value="latency">Fastest arrival</option>
+          </select>
+        </div>
+        <button class="button secondary" id="method-button" type="button">How we count</button>
+        <button class="button primary" id="edit-button" type="button">Edit observations</button>
+      </section>
+
+      <section class="ranking" aria-live="polite">
+        <div class="ranking-head"><span>Route</span><span>Friction index</span><span>What the user does</span><span>Cost / arrival</span></div>
+        <div id="route-list" class="route-list"></div>
+      </section>
+
+      <section class="insight-grid" aria-label="Research insight">
+        <article class="insight-card highlight">
+          <span class="eyebrow">The point</span>
+          <h2 id="best-route">The lowest-friction route is not always the cheapest.</h2>
+          <p id="insight-copy">The index values action count, wallet interruption, and uncertainty alongside price.</p>
+        </article>
+        <article class="insight-card">
+          <span class="metric-label">Median user burden</span>
+          <strong id="median-burden" class="big-number">—</strong>
+          <p>clicks + wallet prompts in this scenario</p>
+        </article>
+        <article class="insight-card">
+          <span class="metric-label">Approval tax</span>
+          <strong id="approval-tax" class="big-number">—</strong>
+          <p>routes that asked for a token approval</p>
+        </article>
+      </section>
+
+      <section class="protocol">
+        <div>
+          <p class="eyebrow">A repeatable project, not a claim of universal truth</p>
+          <h2>Run the same test. Publish the trade-offs.</h2>
+        </div>
+        <ol>
+          <li><b>Standardize.</b> Fix token, amount, source, destination, wallet, and starting balance.</li>
+          <li><b>Observe.</b> Count explicit clicks, wallet prompts, approvals, and network changes.</li>
+          <li><b>Time.</b> Start at route selection; stop when funds are spendable on the destination.</li>
+          <li><b>Repeat.</b> Log timestamp and quote; route availability and fees change constantly.</li>
+        </ol>
+      </section>
+
+      <footer>
+        <span>Bridge Friction Index · A UX/infrastructure research starter</span>
+        <a href="https://github.com/jazzy-with-plant/bridge-comparison" target="_blank" rel="noreferrer">View source</a>
+      </footer>
+    </main>
+
+    <dialog id="method-dialog">
+      <div class="dialog-head"><h2>How the friction index works</h2><button class="close" data-close="method-dialog" aria-label="Close">×</button></div>
+      <p>The score makes invisible interaction cost comparable. It is a research heuristic, not a safety or quality rating.</p>
+      <div class="formula"><span>clicks × 1</span><span>wallet prompts × 2</span><span>approvals × 3</span><span>network switches × 2</span><span>+ latency minutes ÷ 5</span></div>
+      <p class="quiet">Use the same protocol and weighting for every route. If your users care more about a specific burden, adapt the weights and disclose the change.</p>
+    </dialog>
+
+    <dialog id="edit-dialog">
+      <div class="dialog-head"><h2>Update route observations</h2><button class="close" data-close="edit-dialog" aria-label="Close">×</button></div>
+      <p class="quiet">Edits are stored only in this browser. Capture a timestamp and publish your methodology with any comparison.</p>
+      <form id="edit-form"></form>
+      <div class="dialog-actions"><button class="button secondary" id="reset-button" type="button">Restore sample</button><button class="button primary" form="edit-form" type="submit">Apply observations</button></div>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
